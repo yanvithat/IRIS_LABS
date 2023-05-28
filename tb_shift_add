@@ -1,0 +1,60 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 28.05.2023 23:58:54
+// Design Name: 
+// Module Name: tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+`timescale 1ns/1ps
+module shift_and_add_multiplier_tb;
+parameter m=8, n=8;
+reg clk, reset;
+reg [m-1:0] M;
+reg [n-1:0] Q;
+wire [m+n-1:0] C;
+
+shift_and_add_multiplier uut(clk, reset, M, Q, C);
+
+initial 
+begin
+    clk = 1'b1;
+    forever #4 clk = ~clk;
+end
+initial
+begin
+    $dumpfile ("shift_and_add_binary_multiplier_tb.vcd");
+    $dumpvars (0,shift_and_add_binary_multiplier_tb);
+    rst = 1;
+    #2;
+    reset = 0;
+    M = 8'b11111111;
+    Q = 8'b11111111;
+    #20;
+    reset = 1;
+    #2;
+    reset = 0;
+    M = 8'b00011111;
+    Q = 8'b00011111;
+    #20;
+    reset = 1;
+    #2;
+    reset = 0;
+    M = 8'b00000011;
+    Q = 8'b00000010;
+    #20;
+end
+endmodule
+
